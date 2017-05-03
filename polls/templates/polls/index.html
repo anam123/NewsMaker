@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>NewsMaker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/article-lists/index.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header" style="padding-left:1cm">
+      <a class="navbar-brand" href="#">NewsMaker</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      
+    
+    <div style="padding-right:1cm"><a href="{% url 'admin:index' %}"><button class="btn btn-danger navbar-btn">Add New Article</button></a></div>
+    </ul>
+  </div>
+</nav>
+<br>
+
+<h3 align="center" style="padding-right:4cm;padding-left:4cm;padding-top:1cm;padding-bottom:1cm"><b>NewsMaker</b> is a news provider service which automatically associates an image with the news article you write, summarizes the article and categorizes it based on different news topics.</h2>
+
+<br>
+<h3 align="center" style="padding-right:4cm;padding-left:4cm;"><b>Recent Articles</b></h2>
+    <ul class="index">
+        {% if latest_question_list %}
+            {% for question in latest_question_list %}
+                <li>
+                   
+                    <div>
+                        <h2><a href="{% url 'detail' question.id %}">{{ question.news_Article_Heading }}</a></h2>
+                        <br>
+                        <h3>{{ question.content }}</h3>
+
+                        <br>
+                      <div align="center">  <a href="{% url 'detail' question.id %}" class="read-more">Read more &rarr;</a></div>
+                      <h4 >{{ question.created }}</h4>
+                    </div>
+                </li>
+                    
+            {% endfor %}
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+    </ul>
+
+
+</body>
+
+</html>
